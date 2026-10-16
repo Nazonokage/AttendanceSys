@@ -2,6 +2,85 @@
 
 A Spring Boot application for registering students, distributing QR cards, and recording daily attendance. Uses Java 21, Thymeleaf, and a local SQLite database.
 
+## First time? Start here (Windows laptop)
+
+If you already have Java on your laptop, follow these steps. You do **not** need to install Maven or open the project in a code editor.
+
+### Step 1: Check your Java version
+
+Open the Windows Start menu, type **PowerShell**, and open it. Run these commands one at a time:
+
+```powershell
+java -version
+javac -version
+```
+
+Both commands should show **21**. This project needs **JDK 21**, which includes both commands. If Java is missing, the version is different, or `javac` is not recognized, install JDK 21 and reopen PowerShell before continuing. Having an older Java runtime alone is not enough.
+
+### Step 2: Download and extract the project
+
+1. Open <https://github.com/Nazonokage/AttendanceSys>.
+2. Click the green **Code** button, then **Download ZIP**.
+3. Right-click the downloaded ZIP and choose **Extract All**.
+4. Open the extracted folder. Keep opening the inner project folder until you can see **`pom.xml`** and **`mvnw.cmd`** together.
+
+If you already cloned the repository, use that folder instead. You do not need to download it again.
+
+### Step 3: Open PowerShell in that folder
+
+In File Explorer, click the address bar at the top of the project folder, type `powershell`, and press **Enter**. A terminal opens in that folder.
+
+To confirm you are in the right place, run:
+
+```powershell
+dir pom.xml, mvnw.cmd
+```
+
+Both files should appear. If they do not, return to File Explorer and find the folder that contains them.
+
+### Step 4: Build the app (first run)
+
+Copy this command into PowerShell and press **Enter**:
+
+```powershell
+.\mvnw.cmd clean package
+```
+
+Keep your internet connection on. The included wrapper downloads Maven and the libraries the app needs. The first build may take a few minutes. Wait until you see **BUILD SUCCESS**. If you see **BUILD FAILURE**, check the Troubleshooting section below before continuing.
+
+### Step 5: Start the app
+
+After the build succeeds, run:
+
+```powershell
+java -jar .\target\attendanceSys-0.0.1-SNAPSHOT.jar
+```
+
+Leave this terminal open. When you see **Started AttendanceSysApplication**, the app is ready. The terminal staying busy is normal: it is running the app.
+
+### Step 6: Open the app in your browser
+
+Open Chrome, Edge, or another browser and enter:
+
+- **Admin dashboard:** <http://localhost:8080/admin> — register students, import a list, assign years, and download QR cards.
+- **Attendance scanner:** <http://localhost:8080/> — scan a student's code or type their student ID.
+
+Start by registering a student in the dashboard. In **Student directory**, click **Full-screen QR** on their row to view or save their code. You can then use the scanner page to record attendance.
+
+### Step 7: Stop it or run it again later
+
+To stop the app, return to its PowerShell window and press **Ctrl+C**. Closing the browser alone does not stop the app.
+
+Next time, open PowerShell in the **same project folder** and run only:
+
+```powershell
+java -jar .\target\attendanceSys-0.0.1-SNAPSHOT.jar
+```
+
+You do not need to build again on every launch. Build again after downloading or pulling source updates. Student and attendance data are saved in `attendance.db` in the folder you run from; keep that file to retain your records.
+
+---
+
 ## Features
 
 - Register students individually or import a text file.
