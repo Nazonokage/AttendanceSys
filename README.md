@@ -21,7 +21,9 @@ For a normal installation:
 - Internet access for the first Maven build and the camera scanner's CDN library.
 - A browser. Camera scanning needs localhost or HTTPS and camera permission.
 
-The Maven wrapper is included; a separate Maven installation is optional. Docker users only need Git and Docker with Compose; the container builds with Java 21 itself.
+**You do not need to install Maven separately on a new PC.** The repository includes the Maven wrapper (`mvnw.cmd` on Windows and `mvnw` on macOS/Linux), which downloads and runs the required Maven version for you. Install **JDK 21** first; the wrapper does not install Java. The first build needs internet access to download Maven and project dependencies.
+
+Docker users only need Git and Docker with Compose; the container builds with Java 21 itself.
 
 Check your Java installation:
 
@@ -51,11 +53,17 @@ If you already have this project, open a terminal in the directory containing `p
 
 ## 3. Run on Windows (PowerShell)
 
-First build and run all tests:
+### New PC: clone, build, and run without installing Maven
+
+After installing JDK 21 and Git, run:
 
 ```powershell
+git clone https://github.com/Nazonokage/AttendanceSys.git
+cd AttendanceSys
 .\mvnw.cmd clean package
 ```
+
+If you already cloned the project in step 2, skip the clone command and run `.\mvnw.cmd clean package` from the existing project directory. This builds the application and runs all tests.
 
 Wait for **BUILD SUCCESS**, then start the packaged application:
 
@@ -70,7 +78,17 @@ Open:
 - Scanner: <http://localhost:8080/>
 - Admin dashboard: <http://localhost:8080/admin>
 
-To stop the application, press **Ctrl+C** in its terminal. For later launches, run the same `java -jar` command from the project directory. Rebuild after changing the source or pulling updates.
+To stop the application, press **Ctrl+C** in its terminal.
+
+### Later runs
+
+From the project directory, run:
+
+```powershell
+java -jar .\target\attendanceSys-0.0.1-SNAPSHOT.jar
+```
+
+You do not need to run Maven or rebuild on every launch. Rebuild with `.\mvnw.cmd clean package` after changing the source or pulling updates, then start the JAR again.
 
 For development, you can instead run:
 
